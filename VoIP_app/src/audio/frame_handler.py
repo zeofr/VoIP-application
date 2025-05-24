@@ -19,7 +19,7 @@ class FrameHandler:
     def __init__(self, codec, frame_size=320):
         self.codec = codec
         self.frame_size = frame_size
-        self.frame_duration = frame_size / codec.rate
+        self.frame_duration = frame_size / codec.sample_rate
         
         # Buffer management
         self.frame_buffer = deque(maxlen=10)
@@ -49,7 +49,7 @@ class FrameHandler:
             data=data,
             timestamp=time.time(),
             sequence_number=self.frame_count,
-            sample_rate=self.codec.rate,
+            sample_rate=self.codec.sample_rate,
             channels=self.codec.channels,
             frame_size=self.frame_size,
             is_silence=is_silence
@@ -80,7 +80,7 @@ class FrameHandler:
             data=silence_data,
             timestamp=time.time(),
             sequence_number=self.frame_count,
-            sample_rate=self.codec.rate,
+            sample_rate=self.codec.sample_rate,
             channels=self.codec.channels,
             frame_size=self.frame_size,
             is_silence=True
@@ -89,7 +89,7 @@ class FrameHandler:
     def validate_frame(self, frame: AudioFrame) -> bool:
         return (
             len(frame.data) == self.frame_size * 2 and  # 16-bit samples
-            frame.sample_rate == self.codec.rate and
+            frame.sample_rate == self.codec.sample_rate and
             frame.channels == self.codec.channels
         )
 

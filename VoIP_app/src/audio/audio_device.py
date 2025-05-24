@@ -1,4 +1,4 @@
-# src/audio/audio_device.py
+
 import pyaudio
 import numpy as np
 from typing import Optional, Tuple, List
@@ -7,11 +7,11 @@ import time
 
 class AudioDevice:
     def __init__(self, 
-                 input_device_index: Optional[int] = None,
-                 output_device_index: Optional[int] = None,
-                 sample_rate: int = 16000,
-                 channels: int = 1,
-                 chunk_size: int = 320):
+                input_device_index: Optional[int] = None,
+                output_device_index: Optional[int] = None,
+                sample_rate: int = 16000,
+                channels: int = 1,
+                chunk_size: int = 320):
         """
         Initialize audio device for capture and playback
         

@@ -1,6 +1,6 @@
 import pyaudio
 from .frame_handler import FrameHandler, AudioFrame
-from .codec import AudioCodec
+from .codec import OpusCodec
 
 class AudioPlayback:
     def __init__(self, device_index=None, rate=16000, channels=1):
@@ -12,7 +12,7 @@ class AudioPlayback:
         
         self.p = pyaudio.PyAudio()
         self.stream = None
-        self.codec = AudioCodec(rate=rate, channels=channels)
+        self.codec = OpusCodec(sample_rate=rate, channels=channels)
         self.frame_handler = FrameHandler(codec=self.codec)
 
     def list_devices(self):
